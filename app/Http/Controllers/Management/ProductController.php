@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {   
@@ -50,7 +51,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {   
         
           //passando dados para o array afim de evitar um injection via formulario
@@ -78,7 +79,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-         //Buscando Categoria
+         //Buscando produto
          $product = $this->product->where('cod_product',$id)->get()->first();
 
          //se nao existir redireciona de volta
@@ -101,7 +102,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         
-          //Buscando Categoria
+          //Buscando produto
           $product = $this->product->where('cod_product',$id)->get()->first();
 
           //se nao existir redireciona de volta
@@ -121,9 +122,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
-        //Buscando Categoria
+        //Buscando produto
         $product = $this->product->where('cod_category',$id)->get()->first();
         
         //se nao existir redireciona de volta
@@ -137,7 +138,7 @@ class ProductController extends Controller
             'price'=>$request->price,
             'cod_category'=>$request->cod_category,
         ];
-      //criação de nova categoria
+      //criação de novo produto
       $response = $product->update($data);
       //validação
       if($response)
@@ -154,7 +155,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-         //Buscando Categoria
+         //Buscando produto
          $product = $this->product->where('cod_product',$id)->get()->first();
      
          //se nao existir redireciona de volta
