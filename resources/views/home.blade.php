@@ -1,23 +1,69 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+@section('title', 'Spot -Dashboard')
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+@section('content_header')
+    <h1>Dashboard</h1>
+@stop
 
-                    You are logged in!
-                </div>
+@section('content') 
+
+<div class="row">
+
+
+    <div class="col-lg-4 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>{{$user->count()}}</h3>
+
+                <p>Usuarios Cadastrados</p>
+              </div>
+              <div class="icon">
+                <i class="fa fa-users"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
-        </div>
-    </div>
-</div>
-@endsection
+          </div>
+
+          <div class="col-lg-4 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>{{$product->count()}}</h3>
+
+                <p>Produtos Cadastrados</p>
+              </div>
+              <div class="icon">
+                <i class="fa fa-gift"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>{{$category->count()}}</h3>
+
+                <p>Categorias Cadastrados</p>
+              </div>
+              <div class="icon">
+                <i class="fa fa-boxes"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+        </div><!--Row -->
+    </div><!--Container -->
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+    <script> console.log('Hi!'); </script>
+@stop
