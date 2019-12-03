@@ -125,7 +125,7 @@ class CategoryController extends Controller
           if(!$category)
             return redirect()->back();
         
-        //passando dados para o array afim de evitar um injection
+        //passando dados para o array afim de evitar um injection via formulario
         $data = [
             'name'=>$request->name,
             'description'=>$request->description

@@ -7,7 +7,7 @@
 @stop
 
 @section('content') 
-<a href="{{route('categories.create')}}" class="btn btn-primary">
+<a href="{{route('products.create')}}" class="btn btn-primary">
     Cadastrar
 </a>
 <div class="card-body">
@@ -49,15 +49,17 @@
             
                   @forelse($products as $product)
                     <tr>
-                        <td>{{$product->name}}</td>
-                        <td>{{$product->description}}</td>
-                        <td>{{$product->price}}</td>
+                         <td>{{$product->name}}</td> 
+                         <td>{{$product->description}}</td>
+                        <td>{{$product->price}}</td> 
                         <td>{{$product->category->name}}</td>
+                        
                         <td>
                             <a  class="mr-2" href="{{route('products.show',$product->cod_product)}}"> <i style="color:green;" class="fa fa-eye"></i></a>
                             <a  href="{{route('products.edit',$product->cod_product)}}"> <i style="color:blue;" class="fa fa-edit"></i></a>
                             <a class="ml-2" href="{{route('products.destroy',$product->cod_product)}}"> <i style="color:red;" class="fa fa-trash"></i></a>
                         </td>
+                      
                     </tr>
                     @empty
                         <tr class="odd">
@@ -116,4 +118,4 @@
     });
   });
 </script>
-@stop
+@stop 

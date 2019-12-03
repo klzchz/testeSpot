@@ -3,15 +3,17 @@
 namespace App\Http\Controllers\Management;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {   
-    private $product;
-    public function __construct(Product $product)
+    private $product,$category;
+    public function __construct(Product $product,Category $category)
     {
         $this->product = $product;
+        $this->category = $category;
     }
     /**
      * Display a listing of the resource.
@@ -23,6 +25,7 @@ class ProductController extends Controller
         $title = "Products - Spot";//Titulo Dinâmico
 
         $products = $this->product->all(); //Produtos
+     
 
         return view('management.products.index',compact('products','title'));
 
@@ -35,7 +38,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $title = "Criar Produto - Spot";//Titulo Dinâmico
+        //dando pluck no categories para o select
+        $categories = $this->category->pluck('name','cod_category');
+        return view('management.products.create',compact('title','categories'));
     }
 
     /**
@@ -45,8 +51,23 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        
+          //passando dados para o array afim de evitar um injection via formulario
+        $data = [
+            'name'=>$request->name,
+            'description'=>$request->description,
+            'price'=>$request->price,
+            'cod_category'=>$request->cod_category,
+        ];
+        //criando novo produto
+        $response = $this->product->create($data);
+
+          //validação
+          if($response)
+          return redirect()->route('products.index');
+            else
+          return redirect()->back();
     }
 
     /**
@@ -57,7 +78,18 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+         //Buscando Categoria
+         $product = $this->product->where('cod_product',$id)->get()->first();
+
+         //se nao existir redireciona de volta
+         if(!$product)
+             return redirect()->back();
+ 
+         $title = " Ver produto - Spot";//Titulo dinâmico
+         
+
+        
+         return view('management.products.show',compact('title','product'));
     }
 
     /**
@@ -68,7 +100,18 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+          //Buscando Categoria
+          $product = $this->product->where('cod_product',$id)->get()->first();
+
+          //se nao existir redireciona de volta
+          if(!$product)
+              return redirect()->back();
+
+              $title = " Editar product - Spot";//Titulo dinâmico
+              $categories = $this->category->pluck('name','cod_category');
+       
+          return view('management.products.edit',compact('title','product','categories'));
     }
 
     /**
@@ -80,7 +123,27 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //Buscando Categoria
+        $product = $this->product->where('cod_category',$id)->get()->first();
+        
+        //se nao existir redireciona de volta
+        if(!$product)
+          return redirect()->back();
+      
+      //passando dados para o array afim de evitar um injection via formulario
+        $data = [
+            'name'=>$request->name,
+            'description'=>$request->description,
+            'price'=>$request->price,
+            'cod_category'=>$request->cod_category,
+        ];
+      //criação de nova categoria
+      $response = $product->update($data);
+      //validação
+      if($response)
+          return redirect()->route('products.index');
+      else
+          return redirect()->back();
     }
 
     /**
@@ -91,6 +154,18 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+         //Buscando Categoria
+         $product = $this->product->where('cod_product',$id)->get()->first();
+     
+         //se nao existir redireciona de volta
+         if(!$product)
+            return redirect()->back();
+         
+      $response = $product->delete();
+
+      if($response)
+      return redirect()->route('products.index');
+      else
+      return redirect()->back();
     }
 }
