@@ -17,8 +17,14 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('cod_product');
             $table->unsignedBigInteger('cod_category');
 
+            $table->string('name',100);
+
             $table->longText('description')->nullable();
-            
+
+            $table->string('picture',191)->nullable();
+
+            $table->double('price');
+
             $table->foreign('cod_category')
                     ->references('cod_category')
                     ->on('categories')
