@@ -53,8 +53,8 @@
                         <td>{{$category->products()->count()}}</td>
                         <td>
                             <a  class="mr-2" href="{{route('categories.show',$category->cod_category)}}"> <i style="color:green;" class="fa fa-eye"></i></a>
-                            <a  href=""> <i style="color:blue;" class="fa fa-edit"></i></a>
-                            <a class="ml-2" href=""> <i style="color:red;" class="fa fa-trash"></i></a>
+                            <a  href="{{route('categories.edit',$category->cod_category)}}"> <i style="color:blue;" class="fa fa-edit"></i></a>
+                            <a class="ml-2" href="{{route('categories.destroy',$category->cod_category)}}"> <i style="color:red;" class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                     @empty

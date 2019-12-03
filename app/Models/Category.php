@@ -8,6 +8,7 @@ class Category extends Model
 {
     //
     protected $fillable =['name','description'];
+    protected $primaryKey = 'cod_category';
 
     //relacionamento uma categoria pode ter n produtos
 

@@ -20,9 +20,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-
+//Produtos
 Route::resource('/home/products','Management\ProductController');
 
+//Usuarios
 Route::resource('/home/users','Management\UserController');
 
+//Categorias
 Route::resource('home/categories','Management\CategoryController');
+Route::get('home/categories/{id}/delete','Management\CategoryController@destroy')->name('categories.destroy');

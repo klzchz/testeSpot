@@ -96,7 +96,17 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+          //Buscando Categoria
+          $category = $this->category->where('cod_category',$id)->get()->first();
+
+          //se nao existir redireciona de volta
+          if(!$category)
+              return redirect()->back();
+
+              $title = " Editar categoria - Spot";//Titulo dinâmico
+        
+       
+          return view('management.categories.edit',compact('title','category'));
     }
 
     /**
@@ -108,7 +118,25 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, $id)
     {
-        //
+          //Buscando Categoria
+          $category = $this->category->where('cod_category',$id)->get()->first();
+        
+          //se nao existir redireciona de volta
+          if(!$category)
+            return redirect()->back();
+        
+        //passando dados para o array afim de evitar um injection
+        $data = [
+            'name'=>$request->name,
+            'description'=>$request->description
+        ];
+        //criação de nova categoria
+        $response = $category->update($data);
+        //validação
+        if($response)
+            return redirect()->route('categories.index');
+        else
+            return redirect()->back();
     }
 
     /**
@@ -118,7 +146,20 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {   
+        
+        //Buscando Categoria
+        $category = $this->category->where('cod_category',$id)->get()->first();
+     
+          //se nao existir redireciona de volta
+          if(!$category)
+             return redirect()->back();
+          
+       $response = $category->delete();
+
+       if($response)
+       return redirect()->route('categories.index');
+       else
+       return redirect()->back();
     }
 }
