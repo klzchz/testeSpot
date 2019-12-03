@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers\Management;
 
-use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
-{
+{   
+    private $category;
+    public function __construct(Category $category)
+    {   
+        //Usei esse objeto como atributo dessa classe para
+        //usar nos metodos dessa classe sem atribuir um novo objeto
+        $this->category = $category;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        dd('Category Index');
+        $title = "Categoria - Spot";//Titulo dinâmico
+
+        $categories = $this->category->all();//Pegando todas as categorias
+        
+        return view('management.categories.index',compact('categories','title'));//retornando para view
     }
 
     /**
