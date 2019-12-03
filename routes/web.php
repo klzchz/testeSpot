@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Produtos
 Route::resource('/home/products','Management\ProductController');
+Route::get('home/products/{id}/delete','Management\ProductController@destroy')->name('products.destroy');
 
 //Usuarios
 Route::resource('/home/users','Management\UserController');
