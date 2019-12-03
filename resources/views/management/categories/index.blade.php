@@ -7,9 +7,9 @@
 @stop
 
 @section('content') 
-<button class="btn btn-primary">
+<a href="{{route('categories.create')}}" class="btn btn-primary">
     Cadastrar
-</button>
+</a>
 <div class="card-body">
    <div id="example1_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
       <div class="row">

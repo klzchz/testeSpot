@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Management;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
 {   
@@ -35,8 +36,9 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {   
+        $title = "Criar Categoria";//Titulo dinâmico
+        return view('management.categories.create',compact('title'));//retornando view
     }
 
     /**
@@ -45,9 +47,22 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        //passando dados para o array afim de evitar um injection
+        $data = [
+            'name'=>$request->name,
+            'description'=>$request->description
+        ];
+        //criação de nova categoria
+        $response = $this->category->create($data);
+        //validação
+        if($response)
+            return redirect()->route('categories.index');
+        else
+            return redirect()->withErrors('Falha ao cadastrar categoria')->back();
+        
+
     }
 
     /**
@@ -79,7 +94,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
         //
     }
