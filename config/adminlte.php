@@ -190,17 +190,17 @@ return [
         ],
         [
             'text'=>'Categorias',
-            'url'=>'/home',
+            'url'=>'/home/categories',
             'icon'=>'fas fa-boxes' 
          ],
          [
             'text'=>'Produtos',
-            'url'=>'/home',
+            'url'=>'/home/products',
             'icon'=>'fas fa-gift' 
          ],
          [
             'text'=>'Usuarios',
-            'url'=>'/home',
+            'url'=>'/home/users',
             'icon'=>'fas fa-users' 
          ],
         // [

@@ -72,8 +72,20 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+        //Buscando Categoria
+        $category = $this->category->with(['products'])->where('cod_category',$id)->get()->first();
+
+        //se nao existir redireciona de volta
+        if(!$category)
+            return redirect()->back();
+
+        $title = " Ver categoria - Spot";//Titulo dinâmico
+        
+        //buscando produtos da categoria
+        $products = $category->products()->get();
+       
+        return view('management.categories.show',compact('title','category','products'));
     }
 
     /**
