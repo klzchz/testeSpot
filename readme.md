@@ -6,9 +6,9 @@
 <h5>Parte da Dashboard</h5>
 <img src="./dash.png"></img>
 <h5>Parte de Categorias</h5>
-<img src="./doc1.png"></img>
+<img src="./doc3.png"></img>
 <h5>Parte de Produtos</h5>
-<img src="./doc2.png"></img>
+<img src="./doc4.png"></img>
 
 
 ##PS: Acrescentei alguns,campos na modelagem de dados
