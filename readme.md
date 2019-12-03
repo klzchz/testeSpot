@@ -16,4 +16,4 @@
 ##PS 2: Desculpa pelo relaxo na datatable
 
 
-##PS 3: Deixei commitado as estapas e documentado 
+##PS 3: Deixei commitado as etapas e documentado 
